@@ -79,3 +79,6 @@ daughter(X):- daughter(Y,X), print(Y), nl, fail.
 %wife(?X, +Y) - checks if X is Y wife
 wife(X,Y):- woman(X), man(Y), parent(X,K), parent(Y,K), write(yes), !.
 
+%wife(+X) - the predicate that outputs the wife of X
+wife(X):- man(X), parent(X,Z), parent(Y,Z), woman(Y), write(Y), nl, !.
+
