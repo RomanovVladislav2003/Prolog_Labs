@@ -14,3 +14,35 @@ question(winner_champions_league, 'Has he won the Champions League?').
 question(current_coach, 'Is he coaching now?').
 question(rofl_surname, 'Is he being teased dirty?').
 
+main :-
+    retractall(asked(_,_)), findall(A, footballer(A, _), Footballers), identify(Footballers, Result),
+    respond(Result),
+    clear_memory.
+
+identify([Footballer], Footballer) :- !. 
+identify(_, unknown) :-          
+    not(can_ask_more), !.
+
+identify(Footballers, Result) :-
+    select_question(Footballers, Question), ask(Question, Reply),
+    update_footballers(Footballers, Question, Reply, UpdatedFootballers),
+    identify(UpdatedFootballers, Result).
+
+select_question(Footballers, Question) :-
+    question(Fact, Q),
+    not(asked(Fact, _)),
+    is_relevant(Fact, Footballers),
+    Question = question(Fact, Q),
+    !.
+
+is_relevant(Fact, Footballers) :-
+    findall(Val, (member(A, Footballers), footballer(A, Traits), member(Fact-Val, Traits)), Vals), list_to_set(Vals, UniqueVals),
+    length(UniqueVals, Length),
+    Length > 1.
+
+ask(question(Fact, Text), Reply) :-
+    (   asked(Fact, Reply) -> true;
+		nl, write(Text), write(' (y/n)? '),
+        read(Reply),
+        assert(asked(Fact, Reply))
+    ).
