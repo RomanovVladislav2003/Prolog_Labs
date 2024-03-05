@@ -94,6 +94,21 @@ fault(os_error) :-
     not(problem(cannot_read)),
     not(problem(disc_format)).
 
+% Adding new questions and new errors
+fault(malware) :-
+    problem(virus_infection),
+    not(problem(not_printing)),
+    not(problem(no_beep)).
+	
+fault(graphics_card) :-
+    problem(graphics_card_failure),
+    not(problem(no_beep)).
+
+% Questions for additional diagnostics
+problem(virus_infection):- query('The computer is running very slowly, possibly a virus infection?').
+
+problem(graphics_card_failure):- query('Black screens when the display suddenly goes off and does not display anything?').
+	
 query(Prompt) :-
     (   asked(Prompt, Reply) -> true
     ;   nl, write(Prompt), write(' (y/n)? '),
