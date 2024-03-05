@@ -70,3 +70,6 @@ uncle(X,Y):- parent(Z,Y), brother(X,Z), nl, fail.
 %uncles(+X) - predicate that outputs all the uncles of X
 uncles(X):- uncle(Y,X), man(Y), print(Y), nl, fail.
 
+%daughter(?X, +Y) - checks if X is a daughter of Y. 
+daughter(X,Y):- woman(X), parent(Y,X).
+
