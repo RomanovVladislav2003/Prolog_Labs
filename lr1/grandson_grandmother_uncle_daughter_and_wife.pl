@@ -67,4 +67,6 @@ brother(X,Y):- parent(Z,X), parent(Z,Y), man(X), man(Z).
 %uncle(?X, +Y) - checks if X is the uncle of Y
 uncle(X,Y):- parent(Z,Y), brother(X,Z), nl, fail.
 
+%uncles(+X) - predicate that outputs all the uncles of X
+uncles(X):- uncle(Y,X), man(Y), print(Y), nl, fail.
 
