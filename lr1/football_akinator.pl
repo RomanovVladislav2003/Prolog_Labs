@@ -46,3 +46,31 @@ ask(question(Fact, Text), Reply) :-
         read(Reply),
         assert(asked(Fact, Reply))
     ).
+
+update_footballers(Footballers, question(Fact, _), Reply, UpdatedFootballers) :-
+    include(is_match(Fact, Reply), Footballers, UpdatedFootballers).
+
+is_match(Fact, Reply, Footballer) :-
+    footballer(Footballer, Traits),
+    member(Fact-Val, Traits),
+    match_reply(Reply, Val).
+
+match_reply(y, yes).
+match_reply(n, no).
+
+respond(unknown) :-
+    write('I dont know this football player.'), nl.
+
+respond(Footballer) :-
+    write('I guess it is - '), write(Footballer), write('.'), nl.
+
+can_ask_more :-
+    question(Fact, _),
+    not(asked(Fact, _)),
+    !.
+
+clear_memory :-
+    retractall(asked(_, _)).
+
+start :-
+    main.
