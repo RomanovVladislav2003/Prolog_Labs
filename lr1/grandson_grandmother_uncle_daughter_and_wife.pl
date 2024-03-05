@@ -51,3 +51,6 @@ parent(zhdana,zlatomir).
 %son(?X, +Y) - checks if X is the son of Y
 son(X,Y):- man(X), parent(Y,X).
 
+%grand_so(?X, +Y) - checks if X is the grandson of Y
+grand_so(X,Y):- parent(Y,Z), son(X,Z).
+
