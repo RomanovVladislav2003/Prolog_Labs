@@ -64,3 +64,7 @@ grand_ma_and_son(X,Y):- parent(X,Z), parent(Z,Y), woman(X), man(Y), print(yes), 
 %brother(?X, +Y) - checks if X is the brother of Y
 brother(X,Y):- parent(Z,X), parent(Z,Y), man(X), man(Z).
 
+%uncle(?X, +Y) - checks if X is the uncle of Y
+uncle(X,Y):- parent(Z,Y), brother(X,Z), nl, fail.
+
+
