@@ -54,3 +54,6 @@ son(X,Y):- man(X), parent(Y,X).
 %grand_so(?X, +Y) - checks if X is the grandson of Y
 grand_so(X,Y):- parent(Y,Z), son(X,Z).
 
+%grand_sons(+X) - predicate that outputs all the grandsons of X
+grand_sons(X):- grand_so(Y,X), print(Y), nl, fail.
+
