@@ -57,3 +57,7 @@ grand_so(X,Y):- parent(Y,Z), son(X,Z).
 %grand_sons(+X) - predicate that outputs all the grandsons of X
 grand_sons(X):- grand_so(Y,X), print(Y), nl, fail.
 
+%grand_ma_and_son(+X, +Y) - predicate that checks whether X and Y are grandmother and grandson or grandson and grandmother
+grand_ma_and_son(X,Y):- parent(X,Z), parent(Z,Y), woman(X), man(Y), print(yes), nl, fail;
+%parent(Y,Z), parent(Z,X), woman(Y), man(X), print(yes), nl, fail.
+
