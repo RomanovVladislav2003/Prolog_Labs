@@ -61,3 +61,6 @@ grand_sons(X):- grand_so(Y,X), print(Y), nl, fail.
 grand_ma_and_son(X,Y):- parent(X,Z), parent(Z,Y), woman(X), man(Y), print(yes), nl, fail;
 %parent(Y,Z), parent(Z,X), woman(Y), man(X), print(yes), nl, fail.
 
+%brother(?X, +Y) - checks if X is the brother of Y
+brother(X,Y):- parent(Z,X), parent(Z,Y), man(X), man(Z).
+
